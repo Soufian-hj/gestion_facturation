@@ -17,6 +17,7 @@
                 </a>
             </div>
             <ul class="flex space-x-6 text-gray-700 font-medium">
+                <li><a href="{{ route('dashboard') }}" class="hover:text-blue-600">Tableau de bord</a></li>
                 <li><a href="{{ route('clients.index') }}" class="hover:text-blue-600">Clients</a></li>
                 <li><a href="{{ route('produits.index') }}" class="hover:text-blue-600">Produits</a></li>
                 <li><a href="{{ route('factures.index') }}" class="hover:text-blue-600">Factures</a></li>
