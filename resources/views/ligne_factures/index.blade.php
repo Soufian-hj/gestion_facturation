@@ -14,6 +14,7 @@
     <div class="bg-green-100 text-green-800 p-3 rounded mb-6 border-l-4 border-green-500 shadow">
         {{ session('success') }}
     </div>
+    </div>
 @endif
 <div class="overflow-x-auto">
 <table class="min-w-full bg-white rounded-xl shadow-lg border border-gray-200">

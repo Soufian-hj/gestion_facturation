@@ -20,4 +20,9 @@ class LigneFacture extends Model
     {
         return $this->belongsTo(Produit::class);
     }
+
+    public function total()
+    {
+        return $this->prix_total;
+    }
 }

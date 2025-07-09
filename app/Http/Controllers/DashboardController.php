@@ -15,9 +15,9 @@ class DashboardController extends Controller
         $produits = Produit::count();
         $factures = Facture::count();
         $chiffreAffaire = Facture::sum('total');
-        $facturesPayees = Facture::where('statut_paiement', 'Payée')->count();
-        $facturesEnAttente = Facture::where('statut_paiement', 'En attente')->count();
-        $facturesImpayees = Facture::where('statut_paiement', 'Impayée')->count();
+        $facturesPayees = Facture::where('statut_paiement', 'payé')->count();
+        $facturesEnAttente = Facture::where('statut_paiement', 'en attente')->count();
+        $facturesImpayees = Facture::where('statut_paiement', 'impayée')->count();
 
         // Nouveaux clients ce mois
         $clientsRecent = Client::whereMonth('created_at', now()->month)->whereYear('created_at', now()->year)->count();

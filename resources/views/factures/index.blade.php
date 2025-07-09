@@ -21,6 +21,7 @@
 <table class="min-w-full bg-white rounded-xl shadow-lg border border-gray-200">
     <thead class="bg-gradient-to-r from-gray-100 to-gray-200">
         <tr>
+            <th class="p-3 text-left font-semibold text-gray-700">N° Facture</th>
             <th class="p-3 text-left font-semibold text-gray-700">Client</th>
             <th class="p-3 text-left font-semibold text-gray-700">Date</th>
             <th class="p-3 text-left font-semibold text-gray-700">Total</th>
@@ -31,6 +32,7 @@
     <tbody>
         @foreach ($factures as $facture)
         <tr class="border-t border-gray-100 hover:bg-blue-50 transition">
+            <td class="p-3 text-gray-800 font-semibold">{{ $facture->id }}</td>
             <td class="p-3 text-gray-800 font-medium">{{ $facture->client->nom }}</td>
             <td class="p-3 text-gray-600">{{ $facture->date }}</td>
             <td class="p-3 text-gray-900 font-bold">{{ number_format($facture->total, 2) }} DH</td>
@@ -45,6 +47,7 @@
             </td>
             <td class="p-3 text-center">
                 <div class="flex flex-col md:flex-row gap-2 justify-center items-center">
+                    <a href="{{ route('factures.show', $facture) }}" class="inline-flex items-center gap-1 px-3 py-1 bg-gray-100 text-gray-800 rounded hover:bg-gray-200 font-medium transition" title="Voir">👁️ Voir</a>
                     <a href="{{ route('factures.edit', $facture) }}" class="inline-flex items-center gap-1 px-3 py-1 bg-yellow-100 text-yellow-800 rounded hover:bg-yellow-200 font-medium transition" title="Modifier">
                         ✏️ Modifier
                     </a>

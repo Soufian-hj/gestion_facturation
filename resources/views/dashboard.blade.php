@@ -49,7 +49,7 @@
                 <ul class="list-disc pl-6 text-gray-700 mb-6">
                     <li><span class="font-semibold">Factures payées :</span> {{ $facturesPayees }}</li>
                     <li><span class="font-semibold">Factures en attente :</span> {{ $facturesEnAttente }}</li>
-                    <li><span class="font-semibold">Factures impayées :</span> {{ $facturesImpayees }}</li>
+                    <li><span class="font-semibold">Factures annulées :</span> {{ $facturesImpayees }}</li>
                 </ul>
                 <div class="flex-1 flex items-center justify-center">
                     <canvas id="facturesChart" height="100"></canvas>
@@ -64,7 +64,7 @@
     new Chart(ctx, {
         type: 'doughnut',
         data: {
-            labels: ['Payées', 'En attente', 'Impayées'],
+            labels: ['Payées', 'En attente', 'Annulées'],
             datasets: [{
                 data: [{{ $facturesPayees }}, {{ $facturesEnAttente }}, {{ $facturesImpayees }}],
                 backgroundColor: ['#22c55e', '#eab308', '#ef4444'],

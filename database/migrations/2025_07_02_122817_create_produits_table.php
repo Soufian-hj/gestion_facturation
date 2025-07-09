@@ -26,4 +26,13 @@ return new class extends Migration
     {
         Schema::dropIfExists('produits');
     }
+    // database/migrations/XXXX_create_produits_table.php
 };
+// database/migrations/XXXX_create_produits_table.php
+Schema::create('produits', function (Blueprint $table) {
+    $table->id();
+    $table->string('nom');
+    $table->decimal('prix', 10, 2);
+    $table->text('description')->nullable();
+    $table->timestamps();
+});

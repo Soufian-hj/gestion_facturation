@@ -23,6 +23,7 @@
                 <li><a href="{{ route('factures.index') }}" class="hover:text-blue-600">Factures</a></li>
                 <li><a href="{{ route('devis.index') }}" class="hover:text-blue-600">Devis</a></li>
                 <li><a href="{{ route('ligne_factures.index') }}" class="hover:text-blue-600">Ligne Factures</a></li>
+                <li><a href="{{ route('bon_livraisons.index') }}" class="hover:text-blue-600">Bons de Livraison</a></li>
             </ul>
         </div>
     </nav>
