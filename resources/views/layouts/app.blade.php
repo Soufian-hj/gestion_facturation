@@ -21,6 +21,7 @@
                 <li><a href="{{ route('clients.index') }}" class="hover:text-blue-600">Clients</a></li>
                 <li><a href="{{ route('produits.index') }}" class="hover:text-blue-600">Produits</a></li>
                 <li><a href="{{ route('factures.index') }}" class="hover:text-blue-600">Factures</a></li>
+                <li><a href="{{ route('devis.index') }}" class="hover:text-blue-600">Devis</a></li>
                 <li><a href="{{ route('ligne_factures.index') }}" class="hover:text-blue-600">Ligne Factures</a></li>
             </ul>
         </div>
