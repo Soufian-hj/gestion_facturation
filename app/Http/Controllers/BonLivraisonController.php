@@ -24,7 +24,8 @@ class BonLivraisonController extends Controller
     {
         $devis = \App\Models\Devis::all();
         $clients = \App\Models\Client::all();
-        return view('bon_livraisons.create', compact('devis', 'clients'));
+        $prochainNumeroBL = $this->genererProchainNumeroBL();
+        return view('bon_livraisons.create', compact('devis', 'clients', 'prochainNumeroBL'));
     }
 
     /**
@@ -89,8 +90,35 @@ class BonLivraisonController extends Controller
 
     public function downloadPDF(BonLivraison $bonLivraison)
     {
-        $bonLivraison->load('client', 'devi');
+        $bonLivraison->load('client', 'lignes.produit');
         $pdf = Pdf::loadView('bon_livraisons.pdf', compact('bonLivraison'));
         return $pdf->download("bon_livraison_{$bonLivraison->idBL}.pdf");
+    }
+
+    /**
+     * Génère automatiquement le prochain numéro BL
+     */
+    private function genererProchainNumeroBL()
+    {
+        // Récupérer le dernier numéro BL
+        $dernierBL = BonLivraison::orderBy('numeroBL', 'desc')->first();
+        
+        if (!$dernierBL) {
+            // Si aucun BL n'existe, commencer par BL-001
+            return 'BL-001';
+        }
+        
+        // Extraire le numéro du dernier BL
+        $dernierNumero = $dernierBL->numeroBL;
+        
+        // Vérifier si le format est BL-XXX
+        if (preg_match('/^BL-(\d+)$/', $dernierNumero, $matches)) {
+            $numero = (int)$matches[1];
+            $prochainNumero = $numero + 1;
+            return 'BL-' . str_pad($prochainNumero, 3, '0', STR_PAD_LEFT);
+        }
+        
+        // Si le format n'est pas standard, commencer par BL-001
+        return 'BL-001';
     }
 }

@@ -12,12 +12,12 @@
         @csrf
         <div>
             <label class="block font-semibold mb-1">Numéro BL</label>
-            <input type="text" name="numeroBL" value="{{ old('numeroBL') }}" class="w-full border rounded px-3 py-2 @error('numeroBL') border-red-500 @enderror" required>
-            @error('numeroBL')<div class="text-red-600 text-sm">{{ $message }}</div>@enderror
+            <input type="text" name="numeroBL" value="{{ $prochainNumeroBL }}" class="w-full border rounded px-3 py-2 bg-gray-50 text-gray-700 font-mono" readonly>
+            <p class="text-sm text-gray-500 mt-1">Numéro automatiquement généré</p>
         </div>
         <div>
             <label class="block font-semibold mb-1">Date</label>
-            <input type="date" name="date" value="{{ old('date') }}" class="w-full border rounded px-3 py-2 @error('date') border-red-500 @enderror" required>
+            <input type="date" name="date" value="{{ old('date', date('Y-m-d')) }}" class="w-full border rounded px-3 py-2 @error('date') border-red-500 @enderror" required>
             @error('date')<div class="text-red-600 text-sm">{{ $message }}</div>@enderror
         </div>
         <div>
@@ -25,7 +25,7 @@
             <select name="devi_id" class="w-full border rounded px-3 py-2 @error('devi_id') border-red-500 @enderror" required>
                 <option value="">-- Sélectionner --</option>
                 @foreach($devis as $devi)
-                    <option value="{{ $devi->id }}" {{ old('devi_id') == $devi->id ? 'selected' : '' }}>{{ $devi->id }}</option>
+                    <option value="{{ $devi->id }}" {{ old('devi_id') == $devi->id ? 'selected' : '' }}>Devis #{{ $devi->id }} - {{ $devi->client->nom ?? 'Client inconnu' }}</option>
                 @endforeach
             </select>
             @error('devi_id')<div class="text-red-600 text-sm">{{ $message }}</div>@enderror
@@ -35,14 +35,19 @@
             <select name="client_id" class="w-full border rounded px-3 py-2 @error('client_id') border-red-500 @enderror" required>
                 <option value="">-- Sélectionner --</option>
                 @foreach($clients as $client)
-                    <option value="{{ $client->id }}" {{ old('client_id') == $client->id ? 'selected' : '' }}>{{ $client->nom }}</option>
+                    <option value="{{ $client->id }}" {{ old('client_id') == $client->id ? 'selected' : '' }}>{{ $client->nom }} - {{ $client->email }}</option>
                 @endforeach
             </select>
             @error('client_id')<div class="text-red-600 text-sm">{{ $message }}</div>@enderror
         </div>
         <div>
             <label class="block font-semibold mb-1">Statut</label>
-            <input type="text" name="statut" value="{{ old('statut', 'en_preparation') }}" class="w-full border rounded px-3 py-2 @error('statut') border-red-500 @enderror">
+            <select name="statut" class="w-full border rounded px-3 py-2 @error('statut') border-red-500 @enderror">
+                <option value="en_preparation" {{ old('statut') == 'en_preparation' ? 'selected' : '' }}>En préparation</option>
+                <option value="pret" {{ old('statut') == 'pret' ? 'selected' : '' }}>Prêt</option>
+                <option value="livre" {{ old('statut') == 'livre' ? 'selected' : '' }}>Livré</option>
+                <option value="annule" {{ old('statut') == 'annule' ? 'selected' : '' }}>Annulé</option>
+            </select>
             @error('statut')<div class="text-red-600 text-sm">{{ $message }}</div>@enderror
         </div>
         <div class="flex justify-end gap-2">
