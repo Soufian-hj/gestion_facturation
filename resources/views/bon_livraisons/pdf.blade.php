@@ -84,7 +84,7 @@
     </table>
     <table class="signatures">
         <tr>
-            <td>signatures</td>
+            <td>signature</td>
             <td></td>
             <td>STE MTS SMART SARL</td>
         </tr>

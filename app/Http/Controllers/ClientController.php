@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Client;
+use Illuminate\Database\QueryException;
 
 class ClientController extends Controller
 {
@@ -63,7 +64,11 @@ class ClientController extends Controller
      */
     public function destroy(Client $client)
     {
-        $client->delete();
-        return redirect()->route('clients.index')->with('success', 'Client supprimé');
+        try {
+            $client->delete();
+            return redirect()->route('clients.index')->with('success', 'Client supprimé avec succès');
+        } catch (QueryException $e) {
+            return redirect()->route('clients.index')->with('error', 'Impossible de supprimer ce client car il est lié à d\'autres données (factures, devis, etc.)');
+        }
     }
 }
